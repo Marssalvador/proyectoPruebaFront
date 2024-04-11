@@ -5,7 +5,9 @@ import axios from 'axios';
 import md5 from 'md5';
 import Cookies from 'universal-cookie';
 
-const baseUrl="http://localhost:4000/usuarios";
+import { Button } from 'primereact/button';
+
+const baseUrl = "http://localhost:4000/usuarios";
 const cookies = new Cookies();
 
 class Login extends Component {
@@ -32,65 +34,68 @@ class Login extends Component {
     iniciarSesion = async () => {
         await axios.get(baseUrl, {
             params: {
-              username: this.state.form.username,
-              password: md5(this.state.form.password)
+                username: this.state.form.username,
+                password: md5(this.state.form.password)
             }
         })
-        .then(response => {
-            return response.data; // Accede a la propiedad 'data' en la respuesta
-        })
-        .then(response=>{
-            if(response.length>0){
-                var respuesta=response[0];
-                cookies.set('id', respuesta.id, {path:"/"});
-                cookies.set('apellido', respuesta.apellido, {path:"/"});
-                cookies.set('nombre', respuesta.nombre, {path:"/"});
-                cookies.set('username', respuesta.username, {path:"/"});
+            .then(response => {
+                return response.data;
+            })
+            .then(response => {
+                if (response.length > 0) {
+                    var respuesta = response[0];
+                    cookies.set('id', respuesta.id, { path: "/" });
+                    cookies.set('apellido', respuesta.apellido, { path: "/" });
+                    cookies.set('nombre', respuesta.nombre, { path: "/" });
+                    cookies.set('username', respuesta.username, { path: "/" });
 
-                alert(`Bienvenido ${respuesta.nombre} ${respuesta.apellido}`);
+                    alert(`Bienvenido ${respuesta.nombre} ${respuesta.apellido}`);
 
-                window.location.href="./principal"; 
-            }else{
-                alert('El usuario o la contraseña no son correctos');
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        });
+                    window.location.href = "./principal";
+                } else {
+                    alert('El usuario o la contraseña no son correctos');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
 
-    componentDidMount(){
-        if(cookies.get('username')){
-            window.location.href="./principal";
+    componentDidMount() {
+        if (cookies.get('username')) {
+            window.location.href = "./principal";
         }
     }
-      
+
 
     render() {
         return (
-            <div className="containerPrincipal">
-                <div className="containerSecundario">
-                    <div className="form-group">
-                        <label>Usuario: </label>
-                        <br />
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="username"
-                            onChange={this.handleChange}
-                        />
-                        <br />
-                        <label>Contraseña: </label>
-                        <br />
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            onChange={this.handleChange}
-                        />
-                        <br />
-                        <button className="btn btn-primary" onClick={() => this.iniciarSesion()}>Iniciar sesión</button>
+            <div>
+                <h1 style={{ textAlign: 'center', color: '#1976D2', marginTop:'10rem', paddingBottom: '10px', borderBottom: '2px solid #1976D2' }}>Bienvenido a la demo</h1>
+                <div className="containerPrincipal" style={{ border: '2px solid #1976D2', padding: '20px', borderRadius: '5px' }}>
+                    <div className="containerSecundario">
+                        <div className="form-group">
+                            <label>Usuario: </label>
+                            <br />
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="username"
+                                onChange={this.handleChange}
+                            />
+                            <br />
+                            <label>Contraseña: </label>
+                            <br />
+                            <input
+                                type="password"
+                                className="form-control"
+                                name="password"
+                                onChange={this.handleChange}
+                            />
+                            <br />
+                            <Button label="Iniciar sesión" onClick={this.iniciarSesion} className="p-button-primary" />
+                        </div>
                     </div>
                 </div>
             </div>
