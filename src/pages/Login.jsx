@@ -72,7 +72,9 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <h1 style={{ textAlign: 'center', color: '#1976D2', marginTop:'10rem', paddingBottom: '10px', borderBottom: '2px solid #1976D2' }}>Bienvenido a la demo</h1>
+                <h1 className="text-4xl font-bold text-center text-blue-500 mt-10 pb-2 border-b-2 border-blue-500">
+                Bienvenido a la demo
+                </h1>                
                 <div className="containerPrincipal" style={{ border: '2px solid #1976D2', padding: '20px', borderRadius: '5px' }}>
                     <div className="containerSecundario">
                         <div className="form-group">

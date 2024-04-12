@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import Principal from '../pages/Principal';
+import 'tailwindcss/tailwind.css';
+
 
 function App() {
   return (

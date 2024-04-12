@@ -5,6 +5,9 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import Cookies from 'universal-cookie';
 
+import '../css/Login.css';
+
+
 const cookies = new Cookies();
 
 class Principal extends Component {
